@@ -106,5 +106,4 @@ public class lb2 { /*Сазанська 124-19-2*/
         }
         return param;
     }
-    /*Arrays.stream(matrix).flatMapToInt(x -> Arrays.stream(x)).count()*/
 }
