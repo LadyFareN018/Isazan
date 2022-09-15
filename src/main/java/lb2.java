@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.Arrays;
 
-public class lb2 { /*Сазанська 124-19-2*/
+public class lb2 {  /*Сазанська 124-19-2*/
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
