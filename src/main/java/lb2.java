@@ -7,41 +7,40 @@ public class lb2 {  /*Сазанська 124-19-2*/
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int r, c;
-        int from = 1, to = 20;
+        int rowsAmount, colsAmount;
+        int randomGenerationFrom = 1, randomGenerationTo = 20;
 
         System.out.println("Введіть розмір матриці [rows x columns], максимальний розмір якої [20 x 20].");
-        r = matrixSize("рядків");
-        c = matrixSize("стовпців");
+        rowsAmount = matrixSizeCheck("Вкажіть кількість рядків: ");
+        colsAmount = matrixSizeCheck("Вкажіть кількість стовпців: ");
 
-        int[][] arr = new int [r][c];
-        for (int[] row: arr)
+        int[][] matrix = new int [rowsAmount][colsAmount];
+        for (int[] row: matrix)
             Arrays.fill(row, 0);
 
-        System.out.print("Створена матриця ["+r+" x "+c+"]. Заповнити самостійно - (1), згенерувати випадково - (2): ");
+        System.out.print("Створена матриця ["+ rowsAmount +" x "+ colsAmount +"]. " +
+                "Заповнити самостійно - (1), згенерувати випадково - (2): ");
         int g = input.nextInt();
         if (g==1) {
-            for (int i = 0; i < arr.length; i++) {
-                for (int j = 0; j < arr[i].length; j++) {
+            for (int i = 0; i < rowsAmount; i++) {
+                for (int j = 0; j < colsAmount; j++) {
                         System.out.print("Введіть елемент[" + i + "][" + j + "]: ");
-                        arr[i][j] = input.nextInt();
+                        matrix[i][j] = input.nextInt();
                     }
                 }
-                outputMatrix(arr);
+                outputMatrix(matrix);
             }
             else {
-                arr = createRandomMatrix(r,c,from,to);
-                outputMatrix(arr);
+                matrix = createRandomMatrix(rowsAmount,colsAmount,randomGenerationFrom,randomGenerationTo);
+                outputMatrix(matrix);
             }
 
-
-        System.out.println("Максимальне значення у матриці: "+ max(arr));
-        System.out.println("Мінімальне значення у матриці: "+ min(arr));
-        System.out.println("Арифметичне середнє матриці: "+ arithmeticavg(arr));
-        System.out.println("Геометричне середнє матриці: "+ geometricavg(arr));
+        System.out.println("Максимальне значення у матриці: "+ findMaximum(matrix));
+        System.out.println("Мінімальне значення у матриці: "+ findMinimum(matrix));
+        System.out.println("Арифметичне середнє матриці: "+ findArithmeticAvg(matrix));
+        System.out.println("Геометричне середнє матриці: "+ findGeometricAvg(matrix));
     }
 
-    /*Заповнення матриці випадковими цілими числами в діпазоні [from; to]*/
     public static int[][] createRandomMatrix(int rows, int cols, int f, int t) {
         return IntStream.range(0, rows)
                 .mapToObj(i -> new Random()
@@ -49,7 +48,7 @@ public class lb2 {  /*Сазанська 124-19-2*/
                         .toArray())
                 .toArray(int[][]::new);
     }
-    /*Вивід матриці*/
+
     public static void outputMatrix(int[][] matrix) {
         for (int[] line : matrix) {
             for (int elem : line)
@@ -57,53 +56,53 @@ public class lb2 {  /*Сазанська 124-19-2*/
             System.out.println();
         }
     }
-    /*Пошук максимального значення*/
-    public static int max(int[][] matrix) {
-        int m = matrix[0][0];
+
+    public static int findMaximum(int[][] matrix) {
+        int searchingParameter = matrix[0][0];
         for (int[] line : matrix)
             for (int elem : line)
-                if (elem > m) m = elem;
-        return m;
+                if (elem > searchingParameter) searchingParameter = elem;
+        return searchingParameter;
     }
-    /*Пошук мінімального значення*/
-    public static int min(int[][] matrix) {
-        int m = matrix[0][0];
+
+    public static int findMinimum(int[][] matrix) {
+        int searchingParameter = matrix[0][0];
         for (int[] line : matrix)
             for (int elem : line)
-                if (elem < m) m = elem;
-        return m;
+                if (elem < searchingParameter) searchingParameter = elem;
+        return searchingParameter;
     }
-    /*Пошук серед. арифметичного значення*/
-    public static double arithmeticavg(int[][] matrix) {
-        double m = 0;
+
+    public static double findArithmeticAvg(int[][] matrix) {
+        double matrixElemSum = 0;
         for (int[] line : matrix)
             for (int elem : line)
-                m += elem;
-        return m/(matrix.length*matrix[0].length);
+                matrixElemSum += elem;
+        return matrixElemSum/(matrix.length*matrix[0].length);
     }
-    /*Пошук серед. геометричного значення*/
-    public static double geometricavg(int[][] matrix) {
-        double m = 1;
+
+    public static double findGeometricAvg(int[][] matrix) {
+        double matrixElemMultiplication = 1;
         for (int[] line : matrix)
             for (int elem : line)
-                m *= elem;
-        return Math.pow(m,1.0/(matrix.length*matrix[0].length));
+                matrixElemMultiplication *= elem;
+        return Math.pow(matrixElemMultiplication,1.0/(matrix.length*matrix[0].length));
     }
-    /*Превірка на введення розміру матриці*/
-    public static int matrixSize(String rcword) {
+
+    public static int matrixSizeCheck(String messageToUser) {
         Scanner input = new Scanner(System.in);
-        int param;
+        byte size;
         while(true) {
-            System.out.print("Вкажіть кількість "+ rcword +": ");
-            param = input.nextInt();
-            if (param > 20) {
+            System.out.print(messageToUser);
+            size = input.nextByte();
+            if (size > 20) {
                 System.out.print("Значення перевищіло 20. Спробуєте ще раз? y/n ");
-                char yn = input.next().charAt(0);
-                if (yn != 'y')
+                char repeatTrial = input.next().charAt(0);
+                if (repeatTrial != 'y')
                     System.exit(0);
             }
             else break;
         }
-        return param;
+        return size;
     }
 }
