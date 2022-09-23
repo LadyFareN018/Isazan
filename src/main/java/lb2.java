@@ -96,7 +96,7 @@ public class lb2 {  /*Sazanska 124-19-2*/
             System.out.print(messageToUser);
             size = input.nextByte();
             if (size > 20) {
-                System.out.print("Значення перевищіло 20. Спробуєте ще раз? y/n ");
+                System.out.print("Value exceeded 20! Please try again - y/n ");
                 char repeatTrial = input.next().charAt(0);
                 if (repeatTrial != 'y')
                     System.exit(0);
