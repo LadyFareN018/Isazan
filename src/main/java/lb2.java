@@ -3,28 +3,28 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.Arrays;
 
-public class lb2 {  /*Сазанська 124-19-2*/
+public class lb2 {  /*Sazanska 124-19-2*/
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int rowsAmount, colsAmount;
         int randomGenerationFrom = 1, randomGenerationTo = 20;
 
-        System.out.println("Введіть розмір матриці [rows x columns], максимальний розмір якої [20 x 20].");
-        rowsAmount = matrixSizeCheck("Вкажіть кількість рядків: ");
-        colsAmount = matrixSizeCheck("Вкажіть кількість стовпців: ");
+        System.out.println("Enter the size of the matrix [rows x columns], the maximum size of which is [20 x 20].");
+        rowsAmount = matrixSizeCheck("Entry the number of rows: ");
+        colsAmount = matrixSizeCheck("Entry the number of columns: ");
 
         int[][] matrix = new int [rowsAmount][colsAmount];
         for (int[] row: matrix)
             Arrays.fill(row, 0);
 
-        System.out.print("Створена матриця ["+ rowsAmount +" x "+ colsAmount +"]. " +
-                "Заповнити самостійно - (1), згенерувати випадково - (2): ");
-        int g = input.nextInt();
-        if (g==1) {
+        System.out.print("Matrix ["+ rowsAmount +" x "+ colsAmount +"] is created. " +
+                "Manual filling - (1), or automatic randomly filling  - (2): ");
+        int generationType = input.nextInt();
+        if (generationType==1) {
             for (int i = 0; i < rowsAmount; i++) {
                 for (int j = 0; j < colsAmount; j++) {
-                        System.out.print("Введіть елемент[" + i + "][" + j + "]: ");
+                        System.out.print("Entry the element[" + i + "][" + j + "]: ");
                         matrix[i][j] = input.nextInt();
                     }
                 }
@@ -35,10 +35,10 @@ public class lb2 {  /*Сазанська 124-19-2*/
                 outputMatrix(matrix);
             }
 
-        System.out.println("Максимальне значення у матриці: "+ findMaximum(matrix));
-        System.out.println("Мінімальне значення у матриці: "+ findMinimum(matrix));
-        System.out.println("Арифметичне середнє матриці: "+ findArithmeticAvg(matrix));
-        System.out.println("Геометричне середнє матриці: "+ findGeometricAvg(matrix));
+        System.out.println("The maximum value in the matrix: "+ findMaximum(matrix));
+        System.out.println("The minimum value in the matrix: "+ findMinimum(matrix));
+        System.out.println("The arithmetic mean of the matrix: "+ findArithmeticAvg(matrix));
+        System.out.println("The geometric mean of the matrix: "+ findGeometricAvg(matrix));
     }
 
     public static int[][] createRandomMatrix(int rows, int cols, int f, int t) {
