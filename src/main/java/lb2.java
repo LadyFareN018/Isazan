@@ -95,8 +95,9 @@ public class lb2 {  /*Sazanska 124-19-2*/
         while(true) {
             System.out.print(messageToUser);
             size = input.nextByte();
-            if (size > 20) {
-                System.out.print("Value exceeded 20! Please try again - y/n ");
+            if (size > 20 || size < 1) {
+                if(size > 20){ System.out.print("Value exceeded 20! Please try again - y/n ");}
+                else {System.out.print("Value is too small! Please try again - y/n ");}
                 char repeatTrial = input.next().charAt(0);
                 if (repeatTrial != 'y')
                     System.exit(0);
